@@ -11,6 +11,7 @@
 *.sln.docstates
 
 # User-specific files (MonoDevelop/Xamarin Studio)
+/CodeHub/wwwroot/uploads/
 *.userprefs
 
 # Mono auto generated files
