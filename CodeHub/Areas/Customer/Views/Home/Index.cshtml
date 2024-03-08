@@ -1,0 +1,94 @@
+﻿@model HomeViewModel
+<main>
+	<section class="hero__area hero__height hero__height-2 grey-bg-3 d-flex align-items-center"
+			 data-background="/assets/frontend/img/hero/sl-bg.jpg">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-xxl-9 col-xl-10 col-lg-11 col-md-12 col-sm-12">
+					<div class="hero__content hero__content-white text-center">
+						<h2 class="hero__title">
+							The Best
+							Place To Find Code Without Coding.
+						</h2>
+						<p>The bee's knees pardon you plastered it's all gone to pot <br> cheeky bugger wind up down.</p>
+						<div class="hero__search">
+							<form action="#">
+								<div class="hero__search-inner hero__search-3 d-md-flex align-items-center">
+									<div class="hero__search-input">
+										<span><i class="far fa-search"></i></span>
+										<input type="text" placeholder="Search for templates">
+									</div>
+									<button type="submit" class="m-btn ml-20"> <span></span> search</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="overlay-top">
+		<div class="container">
+			<div class="row">
+
+				<!-- Single Category -->
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="mt_cat shadow">
+						<div class="mt_cat_avater">
+							<img src="~/assets/frontend/img/icon/magento.svg" class="img-fluid" alt="">
+						</div>
+						<div class="mt_cat_caps">
+							<h3 class="mt_cat_title"><a href="product.html">Magento</a></h3>
+							<span>200k Items</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Single Category -->
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="mt_cat shadow">
+						<div class="mt_cat_avater">
+							<img src="~/assets/frontend/img/icon/prestashop.png" class="img-fluid" alt="">
+						</div>
+						<div class="mt_cat_caps">
+							<h3 class="mt_cat_title"><a href="product.html">Prestashop</a></h3>
+							<span>12k Items</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Single Category -->
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="mt_cat shadow">
+						<div class="mt_cat_avater">
+							<img src="~/assets/frontend/img/icon/wordpress.svg" class="img-fluid" alt="">
+						</div>
+						<div class="mt_cat_caps">
+							<h3 class="mt_cat_title"><a href="product.html">WordPress Themes</a></h3>
+							<span>500k Items</span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Single Category -->
+				<div class="col-lg-3 col-md-3 col-sm-6">
+					<div class="mt_cat shadow">
+						<div class="mt_cat_avater">
+							<img src="~/assets/frontend/img/icon/shopify.svg" class="img-fluid" alt="">
+						</div>
+						<div class="mt_cat_caps">
+							<h3 class="mt_cat_title"><a href="product.html">shopify</a></h3>
+							<span>10k Items</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+
+	<partial name="_CategoryArea" />
+
+	<partial name="_ProductArea" />
+	<partial name="_ServiceArea" />
+</main>

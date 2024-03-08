@@ -1,0 +1,167 @@
+﻿@model IEnumerable<Product>
+@{
+	ViewData["Title"] = "Product List";
+}
+
+<div class="page-body">
+	<div class="container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-6">
+					<h3>Product list</h3>
+				</div>
+				<div class="col-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a asp-controller="Dashboard" asp-action="Index">
+								<svg class="stroke-icon">
+									<use href="/assets/svg/icon-sprite.svg#stroke-home"></use>
+								</svg>
+							</a>
+						</li>
+						<li class="breadcrumb-item">Products</li>
+						<li class="breadcrumb-item active">Product list</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card">
+					<div class="card-header">
+						<h5>List of Products</h5>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive product-table">
+							<table class="display" id="basic-1">
+								<thead>
+									<tr>
+										<th>Image</th>
+										<th>Name</th>
+										<th>Price</th>
+										<th>Downloads</th>
+										<th>Category</th>
+										<th>Version</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var product in Model)
+									{
+										<tr>
+											<td>
+												<img class="img-100 rounded-circle" src="~/uploads/@product.LogoUrl" alt="#">
+											</td>
+											<td>
+												<h6>@product.Name </h6>
+											</td>
+											<td>$@product.Price.ToString("0.00")</td>
+											<td class="font-success">@product.Downloads</td>
+											<td>@product.Category.Name</td>
+											<td>@product.Version</td>
+											<td>
+												<button onclick="showAlert(@product.Id)" class="btn btn-danger btn-xs delete" type="button" data-original-title="btn btn-danger btn-xs" data-id="@product.Id" title="">Delete</button>
+												<a asp-area="Admin" asp-controller="Product" asp-action="Upsert" asp-route-id="@product.Id">
+													<button class="btn btn-success btn-xs" type="button" data-original-title="btn btn-danger btn-xs" title="">
+														Edit
+													</button>
+												</a>
+											</td>
+										</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+@section Script {
+	<!-- Plugins JS start-->
+	<script src="~/assets/js/sidebar-menu.js"></script>
+	<script src="~/assets/js/slick/slick.min.js"></script>
+	<script src="~/assets/js/slick/slick.js"></script>
+	<script src="~/assets/js/header-slick.js"></script>
+	<script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/assets/js/rating/jquery.barrating.js"></script>
+	<script src="~/assets/js/rating/rating-script.js"></script>
+	<script src="~/assets/js/owlcarousel/owl.carousel.js"></script>
+	<script src="~/assets/js/ecommerce.js"></script>
+	<script src="~/assets/js/product-list-custom.js"></script>
+	<script src="~/assets/js/tooltip-init.js"></script>
+	<script src="~/assets/js/sweet-alert/sweetalert.min.js"></script>
+	<script src="~/assets/js/notify/bootstrap-notify.min.js"></script>
+	<script src="~/assets/js/notify/notify-script.js"></script>
+	<!-- Plugins JS Ends-->
+	<!-- Theme js-->
+	<script src="~/assets/js/script.js"></script>
+	<script>
+		// document.addEventListener('DOMContentLoaded',
+		// 	function () {
+		// 		const deleteButtons = document.querySelectorAll('.delete');
+		// 		deleteButtons.forEach(function (button) {
+		// 			button.addEventListener('click', function () {
+		// 				showAlert(button.dataset.id);
+		// 			});
+		// 		});
+		// 	});
+		const showAlert = (productId) => {
+			swal({
+				title: "Are you sure?",
+				text: "Once deleted, you will not be able to recover this product!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location.href = `/Admin/Product/Delete?id=${productId}`;
+					}
+				})
+		}
+		const showNotify = (msg) => {
+			const content = {
+				message: msg,
+				target: "_blank",
+				title: "Success"
+			};
+			$.notify(content,
+				{
+					type: "success",
+					allow_dismiss: true,
+					newest_on_top: true,
+					mouse_over: true,
+					showProgressbar: false,
+					spacing: "13",
+					timer: "2000",
+					placement: {
+						from: "top",
+						align: "center"
+					},
+					offset: {
+						x: "30",
+						y: "30"
+					},
+					delay: "1000",
+					z_index: "10000",
+					animate: {
+						enter: "animated bounce",
+						exit: "animated bounce"
+					}
+				});
+		}
+	</script>
+	@if (TempData["message"] != null)
+	{
+		<script>
+			showNotify("@TempData["message"]");
+		</script>
+	}
+}

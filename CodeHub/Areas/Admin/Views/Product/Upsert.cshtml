@@ -1,0 +1,152 @@
+﻿@model ProductViewModel
+@{
+	ViewData["Title"] = Model.Product.Id == 0 ? "Create New Product" : "Update Product";
+}
+
+<div class="page-body">
+	<div class="container-fluid">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-6">
+					<h3>
+						Product Create
+					</h3>
+				</div>
+				<div class="col-6">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item">
+							<a asp-controller="Dashboard" asp-action="Index">
+								<svg class="stroke-icon">
+									<use href="~/assets/svg/icon-sprite.svg#stroke-home"></use>
+								</svg>
+							</a>
+						</li>
+						<li class="breadcrumb-item">Products</li>
+						<li class="breadcrumb-item active">@(Model.Product.Id == 0 ? "Product Create" : "Product Update")</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<div class="card">
+					<div class="card-body">
+						<form class="form theme-form" asp-action="Upsert" enctype="multipart/form-data">
+							<input type="hidden" asp-for="Product.Id" />
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label>Product Name</label>
+										<input asp-for="Product.Name" class="form-control" type="text" placeholder="Product name *">
+										<span asp-validation-for="Product.Name" class="text-danger"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Product Price</label>
+										<input asp-for="Product.Price" class="form-control digits" type="number" placeholder="$49">
+										<span asp-validation-for="Product.Price" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Product Version</label>
+										<input asp-for="Product.Version" class="form-control" type="text" placeholder="Enter product version">
+										<span asp-validation-for="Product.Version" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Category</label>
+										<select asp-for="Product.CategoryId" asp-items="@Model.Categories"
+										        class="form-select">
+											<option disabled selected>-- Select Category --</option>
+										</select>
+										<span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="mb-3">
+										<label>Product Description</label>
+										<textarea asp-for="Product.Description" class="form-control" id="exampleFormControlTextarea4" rows="3" placeholder="Description..."></textarea>
+										<span asp-validation-for="Product.Description" class="text-danger"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Product Logo</label>
+										<input class="form-control" name="logo" type="file" accept="image/*">
+										<span asp-validation-for="Product.LogoUrl" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Product Image</label>
+										<input class="form-control" name="image" type="file" accept="image/*">
+										<span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="mb-3">
+										<label>Product Source Code</label>
+										<input class="form-control" name="source" type="file" accept="application/zip">
+										<span asp-validation-for="Product.SourceCodeUrl" class="text-danger"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col">
+									<div class="text-end">
+										<button type="submit" class="btn btn-success me-3">@(Model.Product.Id == 0 ? "Create" : "Update")</button>
+										<a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-danger">Back To Home</a>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			@if (Model.Product.Id != 0)
+			{
+				<div class="col-sm-3">
+					<div class="card">
+						<div class="card-body">
+							<img class="w-100" src="~/uploads/@Model.Product.ImageUrl" alt="">
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</div>
+
+
+
+@section Script {
+	<!-- Plugins JS start-->
+	<script src="~/assets/js/sidebar-menu.js"></script>
+	<script src="~/assets/js/slick/slick.min.js"></script>
+	<script src="~/assets/js/slick/slick.js"></script>
+	<script src="~/assets/js/header-slick.js"></script>
+	<script src="~/assets/js/datepicker/date-picker/datepicker.js"></script>
+	<script src="~/assets/js/datepicker/date-picker/datepicker.en.js"></script>
+	<script src="~/assets/js/datepicker/date-picker/datepicker.custom.js"></script>
+	<script src="~/assets/js/dropzone/dropzone.js"></script>
+	<script src="~/assets/js/dropzone/dropzone-script.js"></script>
+	<script src="~/assets/js/typeahead/handlebars.js"></script>
+	<script src="~/assets/js/typeahead/typeahead.bundle.js"></script>
+	<script src="~/assets/js/typeahead/typeahead.custom.js"></script>
+	<script src="~/assets/js/typeahead-search/handlebars.js"></script>
+	<script src="~/assets/js/typeahead-search/typeahead-custom.js"></script>
+	<!-- Plugins JS Ends-->
+	<!-- Theme js-->
+	<script src="~/assets/js/script.js"></script>
+}

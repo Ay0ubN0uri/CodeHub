@@ -1,0 +1,78 @@
+﻿@model HomeViewModel
+<section class="category__area pt-105 pb-135">
+	<div class="container">
+		<div class="row">
+			<div class="col-xxl-12">
+				<div class="section__title-wrapper text-center mb-60">
+					<h2 class="section__title">Check Out Our Newest Item</h2>
+					<p>Find over 7000 website templates and themes.</p>
+				</div>
+			</div>
+		</div>
+		<div class="new-product-tab">
+			<nav>
+				<div class="nav new-tab-wrapper justify-content-center mb-20" id="nav-tab" role="tablist">
+					<button class="nav-links active" id="nav-all-tab" data-bs-toggle="tab" data-bs-target="#nav-all"
+							type="button" role="tab" aria-controls="nav-all" aria-selected="true">
+						All
+					</button>
+					@* <button class="nav-links" id="nav-wordpress-tab" data-bs-toggle="tab"
+					data-bs-target="#nav-wordpress" type="button" role="tab" aria-controls="nav-wordpress"
+					aria-selected="true">
+					WordPress
+					</button> *@
+					@foreach (var category in Model.Categories)
+					{
+						<button class="nav-links" id="nav-@category.Name.ToLower()-tab" data-bs-toggle="tab" data-bs-target="#nav-@category.Name.ToLower()"
+								type="button" role="tab" aria-controls="nav-@category.Name.ToLower()" aria-selected="true">
+							@category.Name
+						</button>
+					}
+				</div>
+			</nav>
+			<div class="tab-content" id="nav-tabContent">
+				<div class="tab-pane fade show active" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+					<div class="row justify-content-center g-0">
+						@foreach (var product in Model.Products)
+						{
+							<div class="col-auto">
+								<div class="product_new_item">
+									<a href="#">
+										<div class="site-preview"
+											 data-preview-url="/uploads/@product.ImageUrl"
+											 data-item-cost="@product.Price.ToString("0.00")" data-item-category="@product.Category" data-item-author="Theme_Pure"
+											 data-alt="@product.Name"></div>
+										<img src="~/uploads/@product.LogoUrl" alt="">
+									</a>
+								</div>
+							</div>
+						}
+					</div>
+				</div>
+
+				@foreach (var category in Model.Categories)
+				{
+					<div class="tab-pane fade" id="nav-@category.Name.ToLower()" role="tabpanel" aria-labelledby="nav-@category.Name.ToLower()-tab">
+						<div class="row justify-content-center g-0">
+							@foreach (var product in category.Products)
+							{
+								<div class="col-auto">
+									<div class="product_new_item">
+										<a href="#">
+											<div class="site-preview"
+												 data-preview-url="/uploads/@product.ImageUrl"
+												 data-item-cost="@product.Price.ToString("0.00")" data-item-category="@product.Category" data-item-author="Theme_Pure"
+												 data-alt="@product.Name"></div>
+											<img src="~/uploads/@product.LogoUrl" alt="">
+										</a>
+									</div>
+								</div>
+							}
+						</div>
+					</div>
+				}
+
+			</div>
+		</div>
+	</div>
+</section>

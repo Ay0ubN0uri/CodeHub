@@ -1,0 +1,63 @@
+﻿ <!-- header area start -->
+<header>
+	<div class="header__area header__shadow-2 white-bg header-transparent" id="header-sticky">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-xxl-2 col-xl-2 col-lg-2 col-md-4 col-6">
+					<div class="logo">
+						<a href="index.html">
+							<img src="~/assets/images/logo/logo_dark.png" alt="logo">
+						</a>
+					</div>
+				</div>
+				<div class="col-xxl-7 col-xl-7 col-lg-8 d-none d-lg-block">
+					<div class="main-menu d-flex justify-content-end">
+						<nav id="mobile-menu">
+							<ul>
+								<li class="active">
+									<a asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+								</li>
+								<li><a href="product.html">Shop</a></li>
+								<li><a href="contact.html">Contact</a></li>
+								<li><a href="about.html">About</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<div class="col-xxl-3 col-xl-3 col-lg-2 col-md-8 col-6">
+					<div class="header__action d-flex align-items-center justify-content-end">
+						<div class="header__login header__login-2 d-none d-sm-block">
+							<a asp-area="Admin" asp-controller="Authentication" asp-action="Login"><i class="far fa-unlock"></i> Log In</a>
+						</div>
+						@* <div class="header__login header__login-2 d-none d-sm-block">
+						<div class="main-profile">
+						<ul>
+						<li class="has-dropdown">
+						<a href="sign-in.html"><i class="far fa-user"></i>Ay0ub</a>
+						<ul class="submenu">
+						<li><a href="blog.html"><i class="far fa-user"></i>My Profile</a></li>
+						<li><a href="blog.html"><i class="far fa-cog"></i>Settings</a></li>
+						<li>
+						<a href="blog-details.html">
+						<i class="far fa-sign-out"></i>Logout
+						</a>
+						</li>
+						</ul>
+						</li>
+						</ul>
+						</div>
+						</div> *@
+						<div class="sidebar__menu d-lg-none">
+							<div class="sidebar-toggle-btn" id="sidebar-toggle">
+								<span class="line"></span>
+								<span class="line"></span>
+								<span class="line"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<!-- header area end -->
