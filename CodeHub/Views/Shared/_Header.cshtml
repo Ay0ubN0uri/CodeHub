@@ -26,9 +26,48 @@
 				</div>
 				<div class="col-xxl-3 col-xl-3 col-lg-2 col-md-8 col-6">
 					<div class="header__action d-flex align-items-center justify-content-end">
-						<div class="header__login header__login-2 d-none d-sm-block">
+						@if (User.Identity.IsAuthenticated)
+						{
+							<div class="header__login header__login-2 d-none d-sm-block">
+								<div class="main-profile">
+									<ul>
+										<li class="has-dropdown">
+											<a href="#"><i class="far fa-user"></i>@User.Identity.Name</a>
+											<ul class="submenu">
+												@if (User.IsInRole("Admin"))
+												{
+													<li><a href="@Url.Action("Index", "Dashboard", new { Area = "Admin" })"><i class="far fa-home"></i>Dashborad</a></li>
+												}
+												<li><a href="#"><i class="far fa-user"></i>My Profile</a></li>
+												<li><a href=""><i class="far fa-cog"></i>Settings</a></li>
+												<li>
+													@* <a href="blog-details.html">
+														<i class="far fa-sign-out"></i>Logout
+													</a> *@
+
+													<form id="logoutForm" asp-area="Admin" asp-controller="Authentication" asp-action="Logout" method="post" style="display:none;">
+														<button type="submit" class="btn btn-link"></button>
+													</form>
+													<a href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit();">
+														<i class="fa fa-sign-out"></i><span>Log out</span>
+													</a>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</div>
+							</div>
+							
+						}
+						else
+						{
+							<div class="header__login header__login-2 d-none d-sm-block">
+								<a asp-area="Admin" asp-controller="Authentication" asp-action="Login"><i class="far fa-unlock"></i> Log In</a>
+							</div>
+						}
+						@* <div class="header__login header__login-2 d-none d-sm-block">
 							<a asp-area="Admin" asp-controller="Authentication" asp-action="Login"><i class="far fa-unlock"></i> Log In</a>
-						</div>
+						</div> *@
 						@* <div class="header__login header__login-2 d-none d-sm-block">
 						<div class="main-profile">
 						<ul>

@@ -1,12 +1,14 @@
 ﻿using CodeHub.DataAccess.Repository.IRepository;
 using CodeHub.Models.Models;
 using CodeHub.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CodeHub.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize(Roles = "Admin")]
 	public class ProductController(IUnitOfWork unitOfWork, IWebHostEnvironment _webHostEnvironment) : Controller
 	{
 		public IActionResult Index()

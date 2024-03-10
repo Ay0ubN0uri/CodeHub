@@ -5,6 +5,9 @@ namespace CodeHub.DataAccess.Repository.IRepository
 	{
 		ICategoryRepository Category { get; }
 		IProductRepository Product { get; }
-		void Save();
+
+        IUserRepository User { get; }
+
+        void Save();
 	}
 }

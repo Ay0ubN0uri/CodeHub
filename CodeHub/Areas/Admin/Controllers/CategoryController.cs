@@ -1,10 +1,12 @@
 ﻿using CodeHub.DataAccess.Repository.IRepository;
 using CodeHub.Models.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeHub.Areas.Admin.Controllers
 {
 	[Area("Admin")]
+	[Authorize(Roles = "Admin")]
 	public class CategoryController(IUnitOfWork unitOfWork) : Controller
 	{
 		public IActionResult Index()

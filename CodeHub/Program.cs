@@ -2,6 +2,8 @@ using CodeHub.DataAccess.Data;
 using CodeHub.DataAccess.Repository.IRepository;
 using CodeHub.DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using CodeHub.Models.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,29 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
+	.AddRoles<IdentityRole>()
+	.AddEntityFrameworkStores<ApplicationDbContext>();
+
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+builder.Services.AddSession(options =>
+{
+	options.IdleTimeout = TimeSpan.FromSeconds(120);
+	options.Cookie.HttpOnly = true;
+	options.Cookie.IsEssential = true;
+});
+
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.LoginPath = $"/Admin/Authentication/Login";
+	options.LogoutPath = $"/Admin/Authentication/Logout";
+	options.AccessDeniedPath = $"/403";
+});
+
 
 var app = builder.Build();
 
@@ -42,8 +66,33 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseSession();
+
+
 app.UseAuthorization();
 
+
+// Seed roles and admin user
+using (var scope = app.Services.CreateScope())
+{
+	var services = scope.ServiceProvider;
+	try
+	{
+		var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+		var userManager = services.GetRequiredService<UserManager<User>>();
+		await RolesInitializer.SeedRolesAsync(roleManager);
+		await RolesInitializer.SeedAdminAsync(userManager);
+	}
+	catch (Exception ex)
+	{
+		// Log or handle the exception as needed
+		var logger = services.GetRequiredService<ILogger<Program>>();
+		logger.LogError(ex, "An error occurred seeding the DB.");
+	}
+}
+
+/**/
 app.MapControllerRoute(
 	name: "default",
 	//pattern: "{area=Admin}/{controller=Dashboard}/{action=Index}/{id?}");

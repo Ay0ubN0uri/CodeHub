@@ -1,4 +1,6 @@
-﻿@{
+﻿@model RegisterViewModel
+
+@{
 	ViewData["Title"] = "Register";
 	Layout = "_SimpleLayout";
 }
@@ -9,28 +11,47 @@
 			<div>
 				<div><a class="logo text-start" asp-area="Customer" asp-controller="Home" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logo/logo.png" alt="looginpage"><img class="img-fluid for-dark" src="~/assets/images/logo/logo_dark.png" alt="looginpage"></a></div>
 				<div class="login-main">
-					<form class="theme-form">
+					@if (!ViewData.ModelState.IsValid && ViewData.ModelState[""].Errors.Count > 0)
+					{
+						<div class="alert alert-danger" role="alert">
+							@ViewData.ModelState[""].Errors[0].ErrorMessage
+						</div>
+					}
+					<form class="theme-form" asp-area="Admin" asp-controller="Authentication" asp-action="Register" method="post">
 						<h4>Create your account</h4>
 						<p>Enter your personal details to create account</p>
+						<div class="form-group">
+							<label class="col-form-label pt-0">UserName</label>
+							<div class="row g-2">
+								<div class="col-12">
+									<input class="form-control" asp-for="UserName" type="text" required="" placeholder="Username">
+									<span asp-validation-for="UserName" class="text-danger"></span>
+								</div>
+							</div>
+						</div>
 						<div class="form-group">
 							<label class="col-form-label pt-0">Your Name</label>
 							<div class="row g-2">
 								<div class="col-6">
-									<input class="form-control" type="text" required="" placeholder="First name">
+									<input class="form-control" type="text" asp-for="FirstName" required="" placeholder="First name">
+									<span asp-validation-for="FirstName" class="text-danger"></span>
 								</div>
 								<div class="col-6">
-									<input class="form-control" type="text" required="" placeholder="Last name">
+									<input class="form-control" type="text" asp-for="LastName" required="" placeholder="Last name">
+									<span asp-validation-for="LastName" class="text-danger"></span>
 								</div>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-form-label">Email Address</label>
-							<input class="form-control" type="email" required="" placeholder="Test@gmail.com">
+							<input class="form-control" type="email" asp-for="Email" required="" placeholder="Test@gmail.com">
+							<span asp-validation-for="Email" class="text-danger"></span>
 						</div>
 						<div class="form-group">
 							<label class="col-form-label">Password</label>
 							<div class="form-input position-relative">
-								<input class="form-control" type="password" name="login[password]" required="" placeholder="*********">
+								<input class="form-control" type="password" asp-for="Password" required="" placeholder="*********">
+								<span asp-validation-for="Password" class="text-danger"></span>
 								<div class="show-hide"><span class="show"></span></div>
 							</div>
 						</div>

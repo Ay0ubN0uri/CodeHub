@@ -95,7 +95,16 @@
                     <ul class="profile-dropdown onhover-show-div">
                         <li><a href="#"><i data-feather="user"></i><span>Account </span></a></li>
                         <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                        <li><a asp-area="Admin" asp-controller="Authentication" asp-action="Login"><i data-feather="log-in"> </i><span>Log out</span></a></li>
+                        <li><a href ="@Url.Action("Index", "Home", new { Area = "Customer" })"><i data-feather="home"></i><span>Exit</span></a></li>
+                        <li>
+                            @* <a asp-area="Admin" asp-controller="Authentication" asp-action="Login"><i data-feather="log-in"> </i><span>Log out</span></a> *@
+                            <form id="logoutForm" asp-area="Admin" asp-controller="Authentication" asp-action="Logout" method="post" style="display:none;">
+                                <button type="submit" class="btn btn-link"></button>
+                            </form>
+                            <a href="javascript:void(0)" onclick="document.getElementById('logoutForm').submit();">
+                                <i data-feather="log-in"></i><span>Log out</span>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

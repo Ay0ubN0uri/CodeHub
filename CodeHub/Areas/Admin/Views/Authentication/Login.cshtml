@@ -9,23 +9,31 @@
 			<div>
 				<div><a class="logo text-start" asp-area="Customer" asp-controller="Home" asp-action="Index"><img class="img-fluid for-light" src="~/assets/images/logo/logo.png" alt="looginpage"><img class="img-fluid for-dark" src="~/assets/images/logo/logo_dark.png" alt="loginpage"></a></div>
 				<div class="login-main">
-					<form class="theme-form">
+					@* <form class="theme-form"> *@
+					<!-- Display Errors Here -->
+					@if (!ViewData.ModelState.IsValid && ViewData.ModelState[""].Errors.Count > 0)
+					{
+						<div class="alert alert-danger" role="alert">
+							@ViewData.ModelState[""].Errors[0].ErrorMessage
+						</div>
+					}
+					<form class="theme-form" method="post" asp-area="Admin" asp-controller="Authentication" asp-action="Login">
 						<h4>Sign in to account</h4>
 						<p>Enter your email & password to login</p>
 						<div class="form-group">
 							<label class="col-form-label">Email Address</label>
-							<input class="form-control" id="txtEmailID" type="email" required="" value="demo@gmail.com">
+							<input class="form-control" id="txtEmailID" name="email" type="email" required="" placeholder="demo@gmail.com">
 						</div>
 						<div class="form-group">
 							<label class="col-form-label">Password</label>
 							<div class="form-input position-relative">
-								<input class="form-control" type="password" id="txtPassword" name="login[password]" required="" value="123456">
+								<input class="form-control" type="password" id="txtPassword" name="password" required="" placeholder="123456">
 								<div class="show-hide"><span class="show">                         </span></div>
 							</div>
 						</div>
 						<div class="form-group mb-0">
 							<div class="checkbox p-0">
-								<input id="checkbox1" type="checkbox">
+								<input id="checkbox1" name="rememberMe" value="true" type="checkbox">
 								<label class="text-muted" for="checkbox1">Remember password</label>
 							</div>
 							<button class="btn btn-primary btn-block w-100" id="btnSubmit" type="submit">Sign in</button>

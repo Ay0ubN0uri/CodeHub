@@ -5,11 +5,11 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeHub", "CodeHub\CodeHub.csproj", "{701F7D56-22A6-4BC8-97C4-1FCD6F747CF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeHub.DataAccess", "CodeHub.DataAccess\CodeHub.DataAccess.csproj", "{0B1E4BCB-8E3A-4A55-8839-7BD46D979D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeHub.DataAccess", "CodeHub.DataAccess\CodeHub.DataAccess.csproj", "{0B1E4BCB-8E3A-4A55-8839-7BD46D979D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeHub.Models", "CodeHub.Models\CodeHub.Models.csproj", "{099D769F-DE64-4C89-9BD4-E6BEE6BE22E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeHub.Models", "CodeHub.Models\CodeHub.Models.csproj", "{099D769F-DE64-4C89-9BD4-E6BEE6BE22E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeHub.Utility", "CodeHub.Utility\CodeHub.Utility.csproj", "{89A2603A-1B98-4E13-ADC3-AE349F158071}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeHub.Utility", "CodeHub.Utility\CodeHub.Utility.csproj", "{89A2603A-1B98-4E13-ADC3-AE349F158071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
