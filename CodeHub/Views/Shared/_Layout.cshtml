@@ -10,7 +10,14 @@
 			<path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
 		</svg>
 	</div>
-	<partial name="_Header" />
+	@if (ViewData["Title"] == "Shop Page" || ViewData["Title"] == "Product Details" || ViewData["Title"] == "About Us")
+	{
+		<partial name="_ShopHeader" />
+	}
+	else
+	{
+		<partial name="_Header" />
+	}
 	<partial name="_ShoppingCart" />
 	<partial name="_SideBar" />
 	@RenderBody()

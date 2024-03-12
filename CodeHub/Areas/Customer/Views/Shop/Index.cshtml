@@ -1,0 +1,140 @@
+﻿@model ShopViewModel
+@{
+	ViewData["Title"] = "Shop Page";
+}
+
+<main>
+	<!-- bg shape area start -->
+	<div class="bg-shape">
+		<img src="~/assets/frontend/img/shape/shape-1.png" alt="">
+	</div>
+	<!-- bg shape area end -->
+	<!-- product area start -->
+	<section class="product__area po-rel-z1 pt-100 pb-115 grey-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-xxl-4 col-xl-4 col-lg-4 order-lg-first order-last">
+					<div class="product__sidebar mr-30">
+						<div class="product__sidebar-widget  white-bg mb-30">
+							<div class="sidebar__widget mb-20">
+								<form id="catform" asp-action="Index">
+									<div class="sidebar__widget-head d-flex align-items-center justify-content-between">
+										<h4 class="sidebar__widget-title">Category</h4>
+										<button type="button" onclick="window.history.replaceState({}, document.title, window.location.pathname);window.location.reload();" class="sidebar__clear-btn"><i class="fal fa-repeat"></i>Clear</button>
+									</div>
+									<div class="sidebar__widget-content">
+										<div class="sidebar__check-wrapper">
+											<ul>
+												@foreach (var category in Model.Categories)
+												{
+													<li class="d-flex justify-content-between align-items-center">
+														<div class="sidebar__check d-flex align-items-center">
+															<input class="m-check-input" type="checkbox"
+															       id="m-@category.Name" onchange="$('#catform').submit();"
+															       @(Model.SelectedCategories.Contains(category.Id) ? "checked" : "")
+																   value="@category.Id" name="cats">
+															<label class="m-check-label" for="m-@category.Name">@category.Name</label>
+														</div>
+														<span>@category.Products.Count()</span>
+													</li>
+												}
+											</ul>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xxl-8 col-xl-8 col-lg-8">
+					<div class="row">
+						@foreach (var product in Model.Products)
+						{
+							<div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
+								<div class="product__item white-bg mb-30 wow fadeInUp" data-wow-delay=".3s">
+									<div class="product__thumb">
+										<div class="product__thumb-inner fix w-img">
+											<a href="product-details.html">
+												<img src="~/uploads/@product.ImageUrl" alt="">
+											</a>
+										</div>
+										<div class="product__thumb-btn transition-3">
+											<a href="#" class="m-btn m-btn-6 mb-15">
+												Buy Now
+											</a>
+											<a href="https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392" target="_blank" class="m-btn m-btn-7">
+												Preview Project
+											</a>
+										</div>
+									</div>
+									<div class="product__content">
+										<div class="product__meta mb-10 d-flex justify-content-between align-items-center">
+											<div class="product__tag">
+												<a href="#">@product.Category.Name</a>
+											</div>
+											<div class="product__price">
+												<span>$@product.Price.ToString("0.00")</span>
+											</div>
+										</div>
+										<h3 class="product__title">
+											@{
+												var words = product.Name.Split(' ');
+												var shortName = string.Join(" ", words.Take(3));
+											}
+											<a asp-area="Customer" asp-controller="Shop" asp-action="ProductDetails" asp-route-id="@product.Id" >@shortName</a>
+										</h3>
+										<p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
+									</div>
+								</div>
+							</div>
+						}
+					</div>
+					<div class="row">
+						<div class="col-xxl-12">
+							<div class="basic-pagination wow fadeInUp text-center mt-20" data-wow-delay=".2s">
+								<ul>
+									@if (Model.PrevPage is not null)
+									{
+										<li>
+											<a asp-area="Customer" asp-controller="Shop" asp-action="Index" asp-route-pageIndex="@Model.PrevPage">
+												<i class="arrow_left"></i>
+											</a>
+										</li>
+									}
+									@for (int i = 1; i <= Model.TotalPages; i++)
+									{
+										@if (Model.ActivePage == i)
+										{
+											<li class="active">
+												<a asp-area="Customer" asp-controller="Shop" asp-action="Index" asp-route-pageIndex="@i">
+													<span>@i</span>
+												</a>
+											</li>
+										}
+										else
+										{
+											<li>
+												<a asp-area="Customer" asp-controller="Shop" asp-action="Index" asp-route-pageIndex="@i">
+													<span>@i</span>
+												</a>
+											</li>
+										}
+									}
+									@if (Model.NextPage is not null)
+									{
+										<li>
+											<a asp-area="Customer" asp-controller="Shop" asp-action="Index" asp-route-pageIndex="@Model.NextPage">
+												<i class="arrow_right"></i>
+											</a>
+										</li>
+									}
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- product area end -->
+</main>
