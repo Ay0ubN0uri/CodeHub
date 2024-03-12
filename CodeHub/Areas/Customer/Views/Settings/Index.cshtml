@@ -5,75 +5,18 @@
 
 }
 
-<section class="hero__area  grey-bg-3 d-flex align-items-center"
-		 data-background="/assets/frontend/img/hero/sl-bg.jpg" style="height: 100px !important;">
-</section>
-
-<@* div class="container">
-	<div class="page-body my-4" style="margin: 100px 0 100px 0">
-	<div class="container-fluid">
-	<div class="edit-profile">
-	<div class="row">
-	<div class="col-xl-12">
-	<form class="card">
-	<div class="card-header">
-	<h4 class="card-title mb-0">Edit Profile</h4>
-	<div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
-	</div>
-	<div class="card-body">
-	<div class="row">
-	<div class="col-md-6">
-	<div class="mb-3">
-	<label class="form-label">Username</label>
-	<input class="form-control" type="text" placeholder="Username">
-	</div>
-	</div>
-	<div class="col-md-6">
-	<div class="mb-3">
-	<label class="form-label">Last Name</label>
-	<input class="form-control" type="text" placeholder="Last Name">
-	</div>
-	</div>
-	<div class="col-md-6">
-	<div class="mb-3">
-	<label class="form-label">First Name</label>
-	<input class="form-control" type="text" placeholder="First Name">
-	</div>
-	</div>
-	<div class="col-md-6">
-	<div class="mb-3">
-	<label class="form-label">Email address</label>
-	<input class="form-control" type="email" placeholder="Email">
-	</div>
-	</div>
-	</div>
-	</div>
-	<div class="card-footer text-end">
-	<button class="btn btn-success" type="submit">Update Profile</button>
-	</div>
-	</form>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-	*@
-
-
-
 <div class="container">
-	<div class="page-body my-4" style="margin: 100px 0 100px 0">
+	<div class="page-body my-4" style="padding: 80px 50px !important; border: 1px solid #eee;">
 		<div class="container-fluid">
 			<div class="edit-profile">
 				<div class="row">
 					<div class="col-xl-12">
-						<form class="card" method="post" action="@Url.Action("UpdateProfile", "Settings")">
-							<div class="card-header">
+						<form class="" method="post" action="@Url.Action("UpdateProfile", "Settings")">
+							@* <div class="card-header">
 								<h4 class="card-title mb-0">Edit Profile</h4>
 								<!-- Your existing card options -->
-							</div>
-							<div class="card-body">
+							</div> *@
+							<div class="">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="mb-3">
@@ -106,7 +49,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-footer text-end">
+							<div class="text-end">
 								<button class="btn btn-success" type="submit">Update Profile</button>
 							</div>
 						</form>
