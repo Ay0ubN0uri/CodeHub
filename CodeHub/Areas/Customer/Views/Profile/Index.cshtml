@@ -1,0 +1,106 @@
+﻿@model UserInfoViewModel
+@{
+	ViewData["Title"] = "Profile";
+}
+
+<section class="hero__area  grey-bg-3 d-flex align-items-center"
+		 data-background="/assets/frontend/img/hero/sl-bg.jpg" style="height: 100px !important;">
+</section>
+
+<div class="page-body" style="margin: 100px 0 100px 0">
+	<div class="container">
+		<div class="row my-4" style="box-shadow: 1px 1px 6px #5f3afc; padding: 100px 0 100px 0; background: #eee;">
+			<div class="col-lg-12">
+				<div class="text-center card-box">
+					<div class="member-card pt-2 pb-2">
+						<div class="thumb-lg member-thumb mx-auto">
+							<img src="https://bootdey.com/img/Content/avatar/avatar2.png" width="150" class="rounded-circle img-thumbnail" alt="profile-image">
+						</div>
+						<div class="">
+							<h4>@Model.FirstName @Model.LastName</h4>
+							<p class="text-muted">Email <span>| </span><span><a href="#" class="text-pink">@Model.Email</a></span></p>
+						</div>
+						<ul class="social-links list-inline">
+							<a href="@Url.Action("Index", "Settings")" type="button" class="m-btn">Edit Profile</a>
+							<div class="mt-4">
+								<div class="row">
+									<div class="col-6">
+										<div class="mt-3">
+											<h4>0</h4>
+											<p class="mb-0 text-muted">My Orders</p>
+										</div>
+									</div>
+									<div class="col-6">
+										<div class="mt-3">
+											<h4>0</h4>
+											<p class="mb-0 text-muted">In Shopping Cards</p>
+										</div>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	@section Script {
+		<script src="~/assets/js/sidebar-menu.js"></script>
+		<script src="~/assets/js/slick/slick.min.js"></script>
+		<script src="~/assets/js/slick/slick.js"></script>
+		<script src="~/assets/js/header-slick.js"></script>
+		<script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+		<script src="~/assets/js/rating/jquery.barrating.js"></script>
+		<script src="~/assets/js/rating/rating-script.js"></script>
+		<script src="~/assets/js/owlcarousel/owl.carousel.js"></script>
+		<script src="~/assets/js/ecommerce.js"></script>
+		<script src="~/assets/js/product-list-custom.js"></script>
+		<script src="~/assets/js/tooltip-init.js"></script>
+		<script src="~/assets/js/sweet-alert/sweetalert.min.js"></script>
+		<script src="~/assets/js/notify/bootstrap-notify.min.js"></script>
+		<script src="~/assets/js/notify/notify-script.js"></script>
+
+		<!-- Plugins JS Ends-->
+		<!-- Theme js-->
+		<script src="~/assets/js/script.js"></script>
+		<script>
+			const showNotify = (msg) => {
+				const content = {
+					message: msg,
+					target: "_blank",
+					title: "Success"
+				};
+				$.notify(content,
+					{
+						type: "success",
+						allow_dismiss: true,
+						newest_on_top: true,
+						mouse_over: true,
+						showProgressbar: false,
+						spacing: "13",
+						timer: "2000",
+						placement: {
+							from: "top",
+							align: "center"
+						},
+						offset: {
+							x: "30",
+							y: "30"
+						},
+						delay: "1000",
+						z_index: "10000",
+						animate: {
+							enter: "animated bounce",
+							exit: "animated bounce"
+						}
+					});
+			}
+		</script>
+
+		@if (TempData["message"] != null)
+		{
+			<script>
+				showNotify("@TempData["message"]");
+			</script>
+		}
+	}

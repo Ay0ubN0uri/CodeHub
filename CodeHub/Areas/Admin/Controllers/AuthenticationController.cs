@@ -4,6 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using CodeHub.Models.ViewModels;
 using CodeHub.Models.Models;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace CodeHub.Areas.Admin.Controllers
 {
@@ -57,6 +60,83 @@ namespace CodeHub.Areas.Admin.Controllers
 		}
 
 
+		/*[HttpPost]
+		public async Task<IActionResult> Login(string email, string password, bool rememberMe = false)
+		{
+			if (ModelState.IsValid)
+			{
+				var user = await _userManager.FindByEmailAsync(email);
+				if (user != null)
+				{
+					var result = await _signInManager.PasswordSignInAsync(user.UserName, password, rememberMe, lockoutOnFailure: false);
+					if (result.Succeeded)
+					{
+						// Retrieve additional user information
+						var firstName = user.FirstName;
+						var lastName = user.LastName;
+
+						// Add claims for first name, last name, and email
+						var claims = new List<Claim>
+						{
+							new Claim(ClaimTypes.Name, user.UserName),
+							new Claim(ClaimTypes.GivenName, firstName),
+							new Claim(ClaimTypes.Surname, lastName),
+							new Claim(ClaimTypes.Email, email)
+						};
+
+						// Add the claims to the user's identity
+						var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+						var authProperties = new AuthenticationProperties
+						{
+							IsPersistent = rememberMe
+						};
+
+						await HttpContext.SignInAsync(
+							CookieAuthenticationDefaults.AuthenticationScheme,
+							new ClaimsPrincipal(claimsIdentity),
+							authProperties);
+
+						var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+						if (isAdmin)
+						{
+							// Redirect to the Admin dashboard
+							return RedirectToAction("Index", "Dashboard", new { Area = "Admin" });
+						}
+						else
+						{
+							// Redirect to the Home page for normal users
+							return RedirectToAction("Index", "Home", new { Area = "Customer" });
+						}
+					}
+					else
+					{
+						ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+						_logger.LogError("Invalid login attempt.");
+						return View();
+					}
+				}
+				else
+				{
+					_logger.LogError("User not found!");
+				}
+			}
+			else
+			{
+				foreach (var modelStateKey in ViewData.ModelState.Keys)
+				{
+					var modelStateVal = ViewData.ModelState[modelStateKey];
+					foreach (var error in modelStateVal.Errors)
+					{
+						var key = modelStateKey;
+						var errorMessage = error.ErrorMessage;
+						_logger.LogError($"Error in {key}: {errorMessage}");
+					}
+				}
+			}
+			return View();
+		}
+*/
+
 		[HttpPost]
 		public async Task<IActionResult> Login(string email, string password, bool rememberMe = false)
 		{
@@ -107,6 +187,9 @@ namespace CodeHub.Areas.Admin.Controllers
 			}
 			return View();
 		}
+
+
+
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]

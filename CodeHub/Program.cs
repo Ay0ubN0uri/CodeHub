@@ -49,7 +49,7 @@ if (!app.Environment.IsDevelopment())
 }
 app.Use(async (ctx, next) =>
 {
-    await next();
+		await next();
 
     if (ctx.Response.StatusCode == 404 && !ctx.Response.HasStarted)
     {

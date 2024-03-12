@@ -10,6 +10,6 @@ namespace CodeHub.DataAccess.Repository.IRepository
 {
     public interface IUserRepository : IRepository<User>
     {
-        /*Task<IEnumerable<User>> GetAllNonAdminUsersAsync();*/
-    }
+		void Update(User user);
+	}
 }

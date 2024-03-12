@@ -12,6 +12,9 @@ namespace CodeHub.DataAccess.Repository
 {
     public class UserRepository(ApplicationDbContext db) : Repository<User>(db), IUserRepository
     {
-
-    }
+		public void Update(User user)
+		{
+			_db.Users.Update(user);
+		}
+	}
 }

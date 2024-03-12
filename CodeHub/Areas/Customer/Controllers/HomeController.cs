@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CodeHub.Areas.Customer.Controllers
 {
 	[Area("Customer")]
-	/*[Authorize(Roles = "Admin,User")]*/
 	public class HomeController(IUnitOfWork unitOfWork) : Controller
 	{
 		public IActionResult Index()
@@ -23,10 +22,5 @@ namespace CodeHub.Areas.Customer.Controllers
 				Products = products
 			});
 		}
-
-        public IActionResult UserProfile()
-        {
-			return View();
-        }
     }
 }

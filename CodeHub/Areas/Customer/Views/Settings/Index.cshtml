@@ -1,0 +1,220 @@
+﻿@model UserInfoViewModel
+
+@{
+	ViewData["Title"] = "Settings";
+
+}
+
+<section class="hero__area  grey-bg-3 d-flex align-items-center"
+		 data-background="/assets/frontend/img/hero/sl-bg.jpg" style="height: 100px !important;">
+</section>
+
+<@* div class="container">
+	<div class="page-body my-4" style="margin: 100px 0 100px 0">
+	<div class="container-fluid">
+	<div class="edit-profile">
+	<div class="row">
+	<div class="col-xl-12">
+	<form class="card">
+	<div class="card-header">
+	<h4 class="card-title mb-0">Edit Profile</h4>
+	<div class="card-options"><a class="card-options-collapse" href="#" data-bs-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a><a class="card-options-remove" href="#" data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
+	</div>
+	<div class="card-body">
+	<div class="row">
+	<div class="col-md-6">
+	<div class="mb-3">
+	<label class="form-label">Username</label>
+	<input class="form-control" type="text" placeholder="Username">
+	</div>
+	</div>
+	<div class="col-md-6">
+	<div class="mb-3">
+	<label class="form-label">Last Name</label>
+	<input class="form-control" type="text" placeholder="Last Name">
+	</div>
+	</div>
+	<div class="col-md-6">
+	<div class="mb-3">
+	<label class="form-label">First Name</label>
+	<input class="form-control" type="text" placeholder="First Name">
+	</div>
+	</div>
+	<div class="col-md-6">
+	<div class="mb-3">
+	<label class="form-label">Email address</label>
+	<input class="form-control" type="email" placeholder="Email">
+	</div>
+	</div>
+	</div>
+	</div>
+	<div class="card-footer text-end">
+	<button class="btn btn-success" type="submit">Update Profile</button>
+	</div>
+	</form>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	*@
+
+
+
+<div class="container">
+	<div class="page-body my-4" style="margin: 100px 0 100px 0">
+		<div class="container-fluid">
+			<div class="edit-profile">
+				<div class="row">
+					<div class="col-xl-12">
+						<form class="card" method="post" action="@Url.Action("UpdateProfile", "Settings")">
+							<div class="card-header">
+								<h4 class="card-title mb-0">Edit Profile</h4>
+								<!-- Your existing card options -->
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Username</label>
+											<input class="form-control" type="text" placeholder="Username" name="Username" value="@Model.Username" disabled>
+											<input type="hidden" name="Username" value="@Model.Username">
+											<input type="hidden" name="Id" value="@Model.Id">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Last Name</label>
+											<input class="form-control" type="text" placeholder="Last Name" name="LastName" value="@Model.LastName">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">First Name</label>
+											<input class="form-control" type="text" placeholder="First Name" name="FirstName" value="@Model.FirstName">
+										</div>
+									</div>
+
+									<div class="col-md-6">
+										<div class="mb-3">
+											<label class="form-label">Email address</label>
+											<input class="form-control" type="email" placeholder="Email" name="Email" value="@Model.Email">
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer text-end">
+								<button class="btn btn-success" type="submit">Update Profile</button>
+							</div>
+						</form>
+					</div>
+
+					@if (!User.IsInRole("Admin"))
+					{
+						<div class="container">
+							 <div class="list-group-item mt-4">
+								<div class="row align-items-center">
+									<div class="col">
+										<strong class="mb-0">Delete Account</strong>
+										<p class="text-muted mb-0">you can delete your account by clicking on the delete button</p>
+									</div>
+									<div class="col-auto">
+										<div class="custom-control custom-switch">
+											<button id="delete" class="btn btn-danger btn-sm" type="button" data-original-title="btn btn-danger btn-xs" data-id="@Model.Id" title="">Delete Account</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Script {
+	<script src="~/assets/js/sidebar-menu.js"></script>
+	<script src="~/assets/js/slick/slick.min.js"></script>
+	<script src="~/assets/js/slick/slick.js"></script>
+	<script src="~/assets/js/header-slick.js"></script>
+	<script src="~/assets/js/datatable/datatables/jquery.dataTables.min.js"></script>
+	<script src="~/assets/js/rating/jquery.barrating.js"></script>
+	<script src="~/assets/js/rating/rating-script.js"></script>
+	<script src="~/assets/js/owlcarousel/owl.carousel.js"></script>
+	<script src="~/assets/js/ecommerce.js"></script>
+	<script src="~/assets/js/product-list-custom.js"></script>
+	<script src="~/assets/js/tooltip-init.js"></script>
+	<script src="~/assets/js/sweet-alert/sweetalert.min.js"></script>
+	<script src="~/assets/js/notify/bootstrap-notify.min.js"></script>
+	<script src="~/assets/js/notify/notify-script.js"></script>
+
+	<!-- Plugins JS Ends-->
+	<!-- Theme js-->
+	<script src="~/assets/js/script.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded',
+		function () {
+			const deleteButton = document.querySelector('#delete');
+				deleteButton.addEventListener('click', function () {
+					showAlert(deleteButton.dataset.id);
+			});
+		});
+
+		const showAlert = (userId) => {
+			swal({
+				title: "Are you sure?",
+				text: "Once deleted, you will not be able to recover this user!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			})
+				.then((willDelete) => {
+					if (willDelete) {
+						window.location.href = `/Customer/Settings/DeleteUser?id=${userId}`;
+					}
+				})
+		}
+		const showNotify = (msg) => {
+			const content = {
+				message: msg,
+				target: "_blank",
+				title: "Success"
+			};
+			$.notify(content,
+				{
+					type: "success",
+					allow_dismiss: true,
+					newest_on_top: true,
+					mouse_over: true,
+					showProgressbar: false,
+					spacing: "13",
+					timer: "2000",
+					placement: {
+						from: "top",
+						align: "center"
+					},
+					offset: {
+						x: "30",
+						y: "30"
+					},
+					delay: "1000",
+					z_index: "10000",
+					animate: {
+						enter: "animated bounce",
+						exit: "animated bounce"
+					}
+				});
+		}
+	</script>
+
+	@if (TempData["message"] != null)
+	{
+				<script>
+		showNotify("@TempData["message"]");
+		</script>
+	}
+}
