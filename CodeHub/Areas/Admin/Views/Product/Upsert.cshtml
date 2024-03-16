@@ -80,27 +80,36 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="col-sm-4">
+								<div class="col">
+									<div class="mb-3">
+										<label>Product Name</label>
+										<input asp-for="Product.SourceCodeUrl" class="form-control" type="text" placeholder="Product shop url">
+										<span asp-validation-for="Product.SourceCodeUrl" class="text-danger"></span>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
 									<div class="mb-3">
 										<label>Product Logo</label>
 										<input class="form-control" name="logo" type="file" accept="image/*">
 										<span asp-validation-for="Product.LogoUrl" class="text-danger"></span>
 									</div>
 								</div>
-								<div class="col-sm-4">
+								<div class="col-sm-6">
 									<div class="mb-3">
 										<label>Product Image</label>
 										<input class="form-control" name="image" type="file" accept="image/*">
 										<span asp-validation-for="Product.ImageUrl" class="text-danger"></span>
 									</div>
 								</div>
-								<div class="col-sm-4">
+								@* <div class="col-sm-4">
 									<div class="mb-3">
 										<label>Product Source Code</label>
 										<input class="form-control" name="source" type="file" accept="application/zip">
 										<span asp-validation-for="Product.SourceCodeUrl" class="text-danger"></span>
 									</div>
-								</div>
+								</div> *@
 							</div>
 							<div class="row">
 								<div class="col">

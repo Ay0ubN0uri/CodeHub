@@ -7,12 +7,16 @@ namespace CodeHub.Areas.Customer.Controllers
 	[Area("Customer")]
 	public class ShopController(IUnitOfWork unitOfWork) : Controller
 	{
-		public IActionResult Index(int? pageIndex, int[] cats)
+		public IActionResult Index(int? pageIndex, int[] cats,string? query = null)
 		{
 			const int pageSize = 8;
 			var pageNumber = pageIndex ?? 1;
 			var categories = unitOfWork.Category.GetAll("Products");
 			var products = unitOfWork.Product.GetAll("Category");
+			if (query is not null)
+			{
+				products = products.Where(p => p.Name.ToLower().Contains(query));
+			}
 			if (cats.Length > 0)
 			{
 				products = products.Where(p => cats.Contains(p.CategoryId));

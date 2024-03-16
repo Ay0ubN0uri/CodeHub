@@ -61,7 +61,7 @@ namespace CodeHub.Areas.Admin.Controllers
 
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public IActionResult Upsert(Product product, IFormFile? logo, IFormFile? image, IFormFile? source)
+		public IActionResult Upsert(Product product, IFormFile? logo, IFormFile? image)//, IFormFile? source)
 		{
 			var categories = unitOfWork.Category.GetAll().Select(u => new SelectListItem()
 			{
@@ -94,20 +94,20 @@ namespace CodeHub.Areas.Admin.Controllers
 						ModelState.AddModelError("Product.ImageUrl", "Product image is required.");
 						return View(productViewModel);
 					}
-					if (source == null)
-					{
-						ModelState.AddModelError("Product.SourceCodeUrl", "Product source code is required.");
-						return View(productViewModel);
-					}
+					//if (source == null)
+					//{
+					//	ModelState.AddModelError("Product.SourceCodeUrl", "Product source code is required.");
+					//	return View(productViewModel);
+					//}
 					var logoFileName = Guid.NewGuid() + Path.GetExtension(logo.FileName);
 					var imageFileName = Guid.NewGuid() + Path.GetExtension(image.FileName);
-					var sourceFileName = Guid.NewGuid() + Path.GetExtension(source.FileName);
+					//var sourceFileName = Guid.NewGuid() + Path.GetExtension(source.FileName);
 					SaveFile(logo, uploadPath, logoFileName);
 					SaveFile(image, uploadPath, imageFileName);
-					SaveFile(source, uploadPath, sourceFileName);
+					//SaveFile(source, uploadPath, sourceFileName);
 					product.LogoUrl = logoFileName;
 					product.ImageUrl = imageFileName;
-					product.SourceCodeUrl = sourceFileName;
+					//product.SourceCodeUrl = product.SourceCodeUrl;
 					unitOfWork.Product.Add(product);
 					TempData["message"] = "Product created successfully";
 				}
@@ -128,12 +128,12 @@ namespace CodeHub.Areas.Admin.Controllers
 						DeleteOldFile(uploadPath, productToUpdate.ImageUrl);
 						SaveFile(image, uploadPath, productToUpdate.ImageUrl);
 					}
-					if (!string.IsNullOrEmpty(productToUpdate.SourceCodeUrl) && source != null)
-					{
-						// delete the old source
-						DeleteOldFile(uploadPath, productToUpdate.SourceCodeUrl);
-						SaveFile(source, uploadPath, productToUpdate.SourceCodeUrl);
-					}
+					//if (!string.IsNullOrEmpty(productToUpdate.SourceCodeUrl) && source != null)
+					//{
+					//	// delete the old source
+					//	DeleteOldFile(uploadPath, productToUpdate.SourceCodeUrl);
+					//	SaveFile(source, uploadPath, productToUpdate.SourceCodeUrl);
+					//}
 
 					//product.LogoUrl = productToUpdate.LogoUrl;
 					//product.ImageUrl = productToUpdate.ImageUrl;

@@ -21,19 +21,19 @@
 					            </a>
 				            </div>
 				            <div class="product__thumb-btn transition-3">
-					            <a href="#" class="m-btn m-btn-6 mb-15">
+					           @*  <a href="#" class="m-btn m-btn-6 mb-15">
 						            Add to Cart
-					            </a>
-					            <a href="product-details.html" class="m-btn m-btn-7">
+					            </a> *@
+					            <a href="@product.SourceCodeUrl" class="m-btn m-btn-7">
 						            Details
 					            </a>
 				            </div>
 			            </div>
 			            <div class="product__content">
 				            <h3 class="product__title product__title2">
-					            <a href="product-details.html">@product.Name</a>
+					            <a href="@product.SourceCodeUrl">@product.Name</a>
 				            </h3>
-				            <p class="product__author">by <a href="#">Theme Pure</a> in <a href="#">Templates</a></p>
+				            <p class="product__author">by <a href="#">CodeHub</a>
 				            <div class="product__ratings">
 					            <i class="fas fa-star"></i>
 					            <i class="fas fa-star"></i>
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-xxl-12">
                 <div class="product__more text-center mt-30">
-                    <a href="product.html" class="m-btn m-btn-2"> <span></span> Explore Premium</a>
+                    <a asp-controller="Shop" asp-action="Index" class="m-btn m-btn-2"> <span></span> Explore Premium</a>
                 </div>
             </div>
         </div>
