@@ -22,7 +22,7 @@ namespace CodeHub.Utility
 				.RuleFor(e => e.Downloads, f => f.Random.UInt(min: 0U, max: 20000))
 				.RuleFor(e => e.ImageUrl, "img.jpg")
 				.RuleFor(e => e.LogoUrl, "logo.png")
-				.RuleFor(e => e.SourceCodeUrl, "source.zip")
+				.RuleFor(e => e.SourceCodeUrl, "https://themeforest.net/item/zibber-business-consulting-wordpress-theme/30120392")
 				.RuleFor(e => e.Price, f => f.Random.Double(20, 200))
 				.RuleFor(e => e.Category, category);
 
