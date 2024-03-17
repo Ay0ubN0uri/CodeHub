@@ -1,5 +1,5 @@
 # CodeHub
 
-Enjoy Premium Templates and Themes with your CodeHub web app with low prices. Try it!
+Enjoy Premium Templates and Themes with CodeHub in a low prices. Try it now!
 
 ![codehub](./assets/home.png)
