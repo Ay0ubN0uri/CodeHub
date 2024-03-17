@@ -2,4 +2,4 @@
 
 Enjoy Premium Templates and Themes with your CodeHub web app with low prices. Try it!
 
-![codehub](./assets/home)
+![codehub](./assets/home.png)
